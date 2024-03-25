@@ -1,0 +1,38 @@
+/* Styles for tab buttons */
+.tab-buttons {
+    display: flex;
+}
+
+.tab-buttons button {
+    background-color: #f0f0f0;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab-buttons button.active-tab {
+    background-color: #ddd;
+}
+
+.tab-buttons button:hover {
+    background-color: #e5e5e5;
+}
+
+/* Styles for product description */
+.product-description {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+/* Hide inactive product descriptions */
+/* .product-description>p {
+    display: none;
+} */
+
+/* Show active product description */
+/* .product-description>p.active {
+    display: block;
+} */

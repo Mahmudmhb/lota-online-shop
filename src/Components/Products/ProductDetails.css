@@ -1,0 +1,13 @@
+.buttons button {
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+
+}
+
+.buttons button.active-tab {
+    background-color: #ddd;
+    /* border: 4px saddlebrown; */
+
+}
