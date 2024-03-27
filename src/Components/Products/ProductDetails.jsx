@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import usePublicAxios from "../../Layout/usePublicAxios/usePublicAxios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,20 +12,21 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectCube, Pagination } from "swiper/modules";
 import { CiHeart } from "react-icons/ci";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+import { FaHeart, FaMinus, FaPlus } from "react-icons/fa6";
 import "./ProductDetails.css";
 import useProducts from "../../Hooks/usePeoducts/useProducts";
 import Heading from "../../Sheard/Heading/Heading";
-import Card from "../../Sheard/Card/Card";
 import RelatedProducts from "../RelatedProducts/RelatedProducts";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth/useAuth";
 
 const ProductDetails = () => {
+  const [icon, setIcon] = useState(false);
+  const navigate = useNavigate();
   const { user } = useAuth();
   const axiosPublic = usePublicAxios();
   const { id } = useParams();
-  const { products } = useProducts();
+  const [products, refetch] = useProducts();
 
   const [product, setProduct] = useState([]);
   const [count, setCount] = useState(1);
@@ -70,37 +71,6 @@ const ProductDetails = () => {
   } = product;
   const TotalcountPrice = parseFloat(count * price);
 
-  const AdddWishList = async () => {
-    const wishlist = {
-      name: product.name,
-      price: product.price,
-      image: product.image1,
-      productId: product._id,
-      quantity: count,
-      useName: user.displayName,
-      userEmail: user.email,
-    };
-    console.log(wishlist);
-    const res = await axiosPublic.post("/wishlist", wishlist);
-    if (res.data.acknowledged === true) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: `Add your Wishlist`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-    if (res.data.insertId === null) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `Already added your Wishlist`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-  };
   const handleAddToCart = async () => {
     const addtocart = {
       name: product.name,
@@ -133,6 +103,59 @@ const ProductDetails = () => {
       }
     }
   };
+
+  const AdddWishList = async (product) => {
+    if (user) {
+      const wishlist = {
+        name: product.name,
+        price: product.price,
+        image: product.image1,
+        productId: product._id,
+        quantity: 1,
+        useName: user.displayName,
+        userEmail: user.email,
+      };
+
+      const res = await axiosPublic.post("/wishlist", wishlist);
+      console.log(res.data);
+      if (res.data.acknowledged === true) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Add your Wishlist`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setIcon(true);
+      }
+      if (res.data.insertId === null) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Already added your Wishlist`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setIcon(true);
+      }
+      refetch();
+    } else {
+      Swal.fire({
+        title: "Please Login?",
+        text: "You won't be able to Add Wishlist !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
     <div className="  w-5/6 mx-auto my-10 ">
       <div className="md:flex gap-6">
@@ -219,6 +242,7 @@ const ProductDetails = () => {
                 <input
                   type="number"
                   value={count}
+                  min={1}
                   className="w-14 text-center"
                 />
               </p>
@@ -226,18 +250,23 @@ const ProductDetails = () => {
                 <FaPlus />
               </button>
             </div>
-
             <button
               onClick={handleAddToCart}
               className=" w-40 bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
             >
               Add to Cart
             </button>
-            <button
-              onClick={AdddWishList}
-              className="    h-11 w-11 border rounded-full hover:text-[#01bad4] duration-200 hover:border-[#01bad4]  text-center"
-            >
-              <CiHeart className="text-2xl mx-auto"></CiHeart>
+            {/* className="    h-11 w-11 border rounded-full hover:text-[#01bad4] duration-200 hover:border-[#01bad4]  text-center" */}
+            <button onClick={() => AdddWishList(product)}>
+              {icon === true ? (
+                <>
+                  <FaHeart className="text-black h-11 w-11 border rounded-full hover:text-[#01bad4] duration-200 hover:border-[#01bad4]  text-center  text-2xl" />
+                </>
+              ) : (
+                <>
+                  <CiHeart className="hover:text-[#01bad4] h-11 w-11 border rounded-full  duration-200 hover:border-[#01bad4]  text-center text-2xl" />
+                </>
+              )}
             </button>
           </div>
           <h1>SKU: {SKU}</h1>

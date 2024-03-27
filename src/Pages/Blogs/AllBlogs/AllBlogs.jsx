@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import useBlogs from "../../../Hooks/useBlogs/useBlogs";
 import Heading from "../../../Sheard/Heading/Heading";
+import { Helmet } from "react-helmet-async";
 
 const AllBlogs = () => {
   const [blogs] = useBlogs();
 
   return (
     <div className="w-5/6 mx-auto my-20">
+      <Helmet title="blogs - lota-online-shop"></Helmet>
       <Heading
         title={"LATES FROM BLOG"}
         text={"The freshest and most exciting news"}

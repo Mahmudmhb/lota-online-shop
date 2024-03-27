@@ -7,16 +7,15 @@ import useAuth from "../../Hooks/useAuth/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
-import Drawer from "../../Components/Drawer/Drawer";
 
 const Card = ({ product }) => {
   const [icon, setIcon] = useState(false);
+  const navigate = useNavigate();
   const axiosPublic = usePublicAxios();
   const [, refetch] = useProducts();
   const { user } = useAuth();
   const [cartItem, setCaetItem] = useState(true);
 
-  const navigate = useNavigate();
   const AdddWishList = async (product) => {
     if (user) {
       const wishlist = {
@@ -69,38 +68,54 @@ const Card = ({ product }) => {
     }
   };
   const handleAddToCart = async (product) => {
-    const addtocart = {
-      name: product.name,
-      price: product.price,
-      image: product.image1,
-      productId: product._id,
-      quantity: 1,
-      useName: user.displayName,
-      userEmail: user.email,
-    };
+    if (user) {
+      const addtocart = {
+        name: product.name,
+        price: product.price,
+        image: product.image1,
+        productId: product._id,
+        quantity: 1,
+        useName: user.displayName,
+        userEmail: user.email,
+      };
 
-    const res = await axiosPublic.post("/addtocart", addtocart);
-    console.log(res.data);
-    if (res.data.insertedId) {
-      setCaetItem(false);
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: `Add to Cart Done....`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      refetch();
-      if (res.data.message === true) {
+      const res = await axiosPublic.post("/addtocart", addtocart);
+      console.log(res.data);
+      if (res.data.insertedId) {
+        setCaetItem(false);
         Swal.fire({
           position: "center",
-          icon: "error",
-          title: `Already have your Cart......!`,
+          icon: "success",
+          title: `Add to Cart Done....`,
           showConfirmButton: false,
           timer: 1500,
         });
         refetch();
+        if (res.data.message === true) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Already have your Cart......!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
       }
+    } else {
+      Swal.fire({
+        title: "Please Login?",
+        text: "You won't be able to Add Wishlist !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
     }
   };
   return (

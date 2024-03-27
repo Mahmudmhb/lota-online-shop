@@ -39,7 +39,7 @@ const Navber = () => {
       </li>
       <li>
         {" "}
-        <NavLink to="/deshboard">Deshboard</NavLink>
+        <NavLink to="/dashboard">Deshboard</NavLink>
       </li>
     </>
   );
@@ -87,7 +87,7 @@ const Navber = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 uppercase z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 uppercase z-[10] p-2 shadow bg-base-100 rounded-box w-52 "
             >
               {nav}
             </ul>
@@ -95,7 +95,9 @@ const Navber = () => {
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 uppercase">{nav}</ul>
+          <ul className="menu menu-horizontal px-1 uppercase border-red-500 ">
+            {nav}
+          </ul>
         </div>
         <div className="navbar-end items-center gap-3 text-2xl">
           <button>
@@ -108,7 +110,7 @@ const Navber = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[10]  menu  shadow bg-base-100 rounded-box w-40"
+              className="dropdown-content z-[50]  menu  shadow bg-base-100 rounded-box w-40"
             >
               {user ? (
                 <>

@@ -47,89 +47,98 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto my-10 ">
+    <div className="w-5/6 mx-auto  ">
       <Heading title={"my cart"}></Heading>
-      <h1>Total Cart: {cart.length}</h1>
-      <div className="md:flex items-center justify-between">
-        <div className="overflow-x-auto">
-          <table className="table border-2 border-black">
-            {/* head */}
-            <thead>
-              <tr className="text-xl font-bold border-b-2 border-black text-black ">
-                <th>Image</th>
-                <th>Product Name</th>
-
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((item) => (
-                <tr key={item._id} className="border border-black">
-                  <td>
-                    <div className="flex  gap-4">
-                      <div className="avatar">
-                        <div className="  w-20 h-20">
-                          <img src={item.image} alt={item.name} />
+      {cart.length ? (
+        <>
+          <h1 className="text-center">Total Cart: {cart.length}</h1>
+          <div className="m-5">
+            <div className="overflow-x-auto">
+              <table className="table border-2 border-black">
+                {/* head */}
+                <thead>
+                  <tr className="text-xl font-bold border-b-2 border-black text-black ">
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.map((item) => (
+                    <tr key={item._id} className="border border-black">
+                      <td>
+                        <div className="flex  gap-4">
+                          <div className="avatar">
+                            <div className="  w-20 h-20">
+                              <img src={item.image} alt={item.name} />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{item.name}</td>
+                      </td>
+                      <td>{item.name}</td>
 
-                  <th>{item.quantity}</th>
-                  <td>{item.price}</td>
-                  <th className="hover:text-[#01bad4] duration-200 text-2xl">
-                    <button onClick={() => handleDelete(item._id)}>X</button>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="md:w-1/3 my-5">
-          <h1 className="my-5 text-5 font-bold">CART TOTALS</h1>
-
-          <div className="border ">
-            <div className="flex justify-between border p-5">
-              <p>Subtotal</p>
-              <p>${TotalPrice}</p>
+                      <th>{item.quantity}</th>
+                      <td>{item.price}</td>
+                      <th className="hover:text-[#01bad4] duration-200 text-2xl">
+                        <button onClick={() => handleDelete(item._id)}>
+                          X
+                        </button>
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="flex justify-between border p-5">
-              <p>Shipping</p>
-              <div>
-                <div>
-                  <input
-                    type="radio"
-                    onClick={() => HandleShipping(15)}
-                    checked={shipping === true ? "checked" : ""}
-                  />
-                  <label>
-                    Local Pickup: <bdi>$ 15</bdi>
-                  </label>
+
+            <div className="md:w-1/3 my-5 mx-auto">
+              <h1 className="my-5 text-5 font-bold">CART TOTALS</h1>
+
+              <div className="border ">
+                <div className="flex justify-between border p-5">
+                  <p>Subtotal</p>
+                  <p>${TotalPrice}</p>
                 </div>
-                <div>
-                  <input
-                    type="radio"
-                    onClick={() => HandleShipping(0)}
-                    checked={shipping === true ? "" : "checked"}
-                  />
-                  <label> Free Shipping</label>
+                <div className="flex justify-between border p-5">
+                  <p>Shipping</p>
+                  <div>
+                    <div>
+                      <input
+                        type="radio"
+                        onClick={() => HandleShipping(15)}
+                        checked={shipping === true ? "checked" : ""}
+                      />
+                      <label>
+                        Local Pickup: <bdi>$ 15</bdi>
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        onClick={() => HandleShipping(0)}
+                        checked={shipping === true ? "" : "checked"}
+                      />
+                      <label> Free Shipping</label>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-between border p-5">
+                  <p>Total With Shipping</p>
+                  <p>${price}</p>
                 </div>
               </div>
-            </div>
-            <div className="flex justify-between border p-5">
-              <p>Total With Shipping</p>
-              <p>${price}</p>
+              <button className=" duration-500 mt-5 hover:bg-[#01bad4] w-full bg-black text-white rounded-3xl p-2 uppercase font-bold">
+                Proceed to checkout
+              </button>
             </div>
           </div>
-          <button className=" duration-500 mt-5 hover:bg-[#01bad4] w-full bg-black text-white rounded-3xl p-2 uppercase font-bold">
-            Proceed to checkout
-          </button>
-        </div>
-      </div>
+        </>
+      ) : (
+        <>
+          <h1 className="text-center">No products in the cart.</h1>
+        </>
+      )}
     </div>
   );
 };

@@ -9,6 +9,8 @@ import MyCart from "../Components/MyCart/MyCart";
 import BlogDetails from "../Pages/Blogs/BLogDetails/BlogDetails";
 import AllBlogs from "../Pages/Blogs/AllBlogs/AllBlogs";
 import Products from "../Pages/Shop/Products/Products";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +51,24 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Products></Products>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "allusers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "wishlist",
+        element: <MyWishlist></MyWishlist>,
+      },
+      {
+        path: "mycart",
+        element: <MyCart></MyCart>,
       },
     ],
   },

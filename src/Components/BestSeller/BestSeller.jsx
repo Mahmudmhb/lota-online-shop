@@ -13,7 +13,6 @@ const BestSeller = () => {
       setDress(res.data);
     });
   }, [axiosPublic]);
-  console.log(dress);
   const handleTabClick = async (tabId) => {
     setActiveTab(tabId);
     const category = await axiosPublic.get(`/product/${tabId}`);
@@ -21,11 +20,11 @@ const BestSeller = () => {
   };
 
   return (
-    <div>
+    <div className="w-5/6 mx-auto">
       <Heading title={"BEST SELLER"} text={"Top sale in this week"}></Heading>
 
       <div>
-        <div className="my-10 buttons text-center">
+        <div className="my-10 buttons text-center border-b-2 border-[#01bad4] pb-2">
           <button
             className={
               activeTab === "dress"
@@ -70,7 +69,7 @@ const BestSeller = () => {
         <div>
           {activeTab === "dress" && (
             <>
-              <div className="grid md:grid-cols-4 gap-2 justify-center w-5/6 mx-auto">
+              <div className="grid md:grid-cols-4 gap-2 justify-center ">
                 {dress.slice(0, 4).map((product) => (
                   <Card key={product._id} product={product}></Card>
                 ))}
