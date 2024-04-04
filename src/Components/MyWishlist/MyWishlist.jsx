@@ -3,10 +3,13 @@ import useWishlist from "../../Hooks/useWishlist/useWishlist";
 import usePublicAxios from "../../Layout/usePublicAxios/usePublicAxios";
 import Heading from "../../Sheard/Heading/Heading";
 import Bannar from "../../Sheard/Bannar/Bannar";
+import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth/useAuth";
 
 const MyWishlist = () => {
   const [wishlist, refetch] = useWishlist();
   const axiosPublic = usePublicAxios();
+  const { user } = useAuth();
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -35,9 +38,18 @@ const MyWishlist = () => {
   };
 
   const handleAddToCart = async (item) => {
-    const res = await axiosPublic.post("/addtocart", item);
+    const addCart = {
+      name: item.name,
+      image: item.image,
+      price: item.price,
+      productId: item._id,
+      quantity: 1,
+      useName: user.displayName,
+      userEmail: user.email,
+    };
+    const res = await axiosPublic.post("/addtocart", addCart);
     console.log(res.data);
-    if (res.data.message === true) {
+    if (res.data.insertId) {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -58,7 +70,7 @@ const MyWishlist = () => {
         title={"WISHLIST"}
         text={"View your wishlist products"}
       ></Bannar>
-      <div className="w-5/6 mx-auto my-10">
+      <div className="w-5/6 mx-auto my-10 text-center">
         <Heading title={"my wishlist"}></Heading>
         {wishlist.length ? (
           <>
@@ -112,7 +124,14 @@ const MyWishlist = () => {
           </>
         ) : (
           <>
-            <h1 className="text-center">No products added to the wishlist</h1>
+            <h1 className=" flex items-center justify-center w-full h-20 bg-[#d9edf7]">
+              No products added to the wishlist
+            </h1>
+            <Link to="/shop">
+              <button className="border-2 my-5 text-xl border-black hover:text-white duration-300 hover:bg-[#01bad4] hover:border-[#01bad4]  rounded-2xl py-2 px-5 text-center">
+                Return to shop
+              </button>
+            </Link>
           </>
         )}
       </div>

@@ -5,8 +5,10 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../Firebase/Firebase.init";
+import usePublicAxios from "../Layout/usePublicAxios/usePublicAxios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -14,9 +16,18 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const axiosPublic = usePublicAxios();
+
   const handleRegister = (email, password) => {
     setIsLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const handleUpdateUser = (name, photoURL) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    });
   };
   const handleLogin = (email, password) => {
     setIsLoading(true);
@@ -28,17 +39,21 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("login");
-
+      if (currentUser) {
+        const res = axiosPublic.post("/users", currentUser).then((res) => {
+          // console.log(res.data)
+        });
+      }
       setUser(currentUser);
       setIsLoading(false);
     });
     return () => unSubscribe();
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     handleRegister,
     handleLogin,
     handleLogOut,
+    handleUpdateUser,
     user,
     isLoading,
   };

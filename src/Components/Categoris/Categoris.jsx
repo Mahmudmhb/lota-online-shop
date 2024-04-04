@@ -18,7 +18,7 @@ const Categoris = () => {
           <div className="md:flex mb-5 gap-5">
             <div className="md:h-[300px] md:w-[270px]  relative image-container  w-full">
               <img
-                src="https://janstudio.net/claue/demo/wp-content/uploads/2016/04/footer-wear.jpg"
+                src="https://janstudio.net/claue/demo/wp-content/uploads/2016/09/p5-4.jpg"
                 alt=""
               />
               <button className="absolute bottom-4 right-1/3 w-[150px] font-bold  bg-white p-2 px-4">

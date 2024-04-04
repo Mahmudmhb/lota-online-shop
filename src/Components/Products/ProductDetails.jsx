@@ -26,7 +26,7 @@ const ProductDetails = () => {
   const { user } = useAuth();
   const axiosPublic = usePublicAxios();
   const { id } = useParams();
-  const [products, refetch] = useProducts();
+  const [, refetch] = useProducts();
 
   const [product, setProduct] = useState([]);
   const [count, setCount] = useState(1);
@@ -84,7 +84,7 @@ const ProductDetails = () => {
 
     const res = await axiosPublic.post("/addtocart", addtocart);
     console.log(res.data);
-    if (res.data.insertedId) {
+    if (res.data.insertId) {
       Swal.fire({
         position: "center",
         icon: "success",

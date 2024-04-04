@@ -3,23 +3,29 @@ import Heading from "../../Sheard/Heading/Heading";
 import Swal from "sweetalert2";
 import usePublicAxios from "../../Layout/usePublicAxios/usePublicAxios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
   const axiosPublic = usePublicAxios();
   const [shipping, setShipping] = useState(false);
-  const [price, setPrice] = useState();
+  const [newPrice, setNewPrice] = useState(0);
 
   const TotalPrice = cart.reduce((price, cart) => price + cart.price, 0);
+
+  // setNewPrice(TotalPrice);
+  console.log(TotalPrice);
 
   const HandleShipping = (item) => {
     setShipping(!shipping);
     const shippingPrice = item;
     var cartPrice = TotalPrice + shippingPrice;
-    setPrice(cartPrice);
+    setNewPrice(cartPrice);
   };
 
+  // setNewPrice(TotalPrice);
   const handleDelete = async (id) => {
+    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You Want to Remove item!",
@@ -31,7 +37,7 @@ const MyCart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosPublic.delete(`/addtocart/${id}`);
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data.deletedCount === 1) {
           Swal.fire({
             position: "center",
@@ -47,7 +53,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto  ">
+    <div className="w-5/6 mx-auto text-center ">
       <Heading title={"my cart"}></Heading>
       {cart.length ? (
         <>
@@ -125,18 +131,50 @@ const MyCart = () => {
                 </div>
                 <div className="flex justify-between border p-5">
                   <p>Total With Shipping</p>
-                  <p>${price}</p>
+                  {newPrice === 0 ? (
+                    <>
+                      {" "}
+                      <p>${TotalPrice}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>${newPrice?.toFixed(2)}</p>
+                    </>
+                  )}
                 </div>
               </div>
-              <button className=" duration-500 mt-5 hover:bg-[#01bad4] w-full bg-black text-white rounded-3xl p-2 uppercase font-bold">
-                Proceed to checkout
-              </button>
+              {shipping === false ? (
+                <>
+                  <div>
+                    {/* <button className=" disabled duration-500 mt-5 hover:bg-[#01bad4] w-full bg-black text-white rounded-3xl p-2 uppercase font-bold">
+                      Proceed to checkout
+                    </button> */}
+                    <p className="text-red-700 font-bold mt-5">
+                      Free shopping is available Right now We will include it
+                      immediately
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <button className=" duration-500 mt-5 hover:bg-[#01bad4] w-full bg-black text-white rounded-3xl p-2 uppercase font-bold">
+                    Proceed to checkout
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </>
       ) : (
         <>
-          <h1 className="text-center">No products in the cart.</h1>
+          <h1 className=" flex items-center justify-center w-full h-20 bg-[#d9edf7]">
+            No products in the cart.
+          </h1>
+          <Link to="/shop">
+            <button className="border-2 my-5 text-xl border-black hover:text-white duration-300 hover:bg-[#01bad4] hover:border-[#01bad4]  rounded-2xl py-2 px-5 text-center">
+              Return to shop
+            </button>
+          </Link>
         </>
       )}
     </div>

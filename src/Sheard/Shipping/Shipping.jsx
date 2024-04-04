@@ -1,10 +1,9 @@
-import React from "react";
 import { FaCar, FaDoorClosed } from "react-icons/fa6";
 import { IoIosHelpBuoy, IoIosRefresh } from "react-icons/io";
 
 const Shipping = () => {
   return (
-    <div className=" p-6 md:flex gap-4 border-t-2">
+    <div className=" p-6 md:flex gap-4 border-t-2 mt-10">
       <div className="flex  h-32  gap-5">
         <FaCar className="text-3xl text-[#9e9e9e]"></FaCar>
         <div>

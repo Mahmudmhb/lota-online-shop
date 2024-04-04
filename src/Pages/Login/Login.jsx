@@ -1,24 +1,42 @@
 import Heading from "../../Sheard/Heading/Heading";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { handleLogin } = useAuth();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
     handleLogin(email, password)
       .then((result) => {
         console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Welcome ${result.user.email}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Welcome ${error.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
   };
   return (
     <div className="w-5/6 mx-auto">
-      <Heading title={"my contact"}></Heading>
+      <Heading title={"LOgin page"}></Heading>
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}

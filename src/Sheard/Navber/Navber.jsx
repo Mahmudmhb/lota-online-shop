@@ -9,12 +9,13 @@ import useCart from "../../Hooks/useCart/useCart";
 const Navber = () => {
   const { handleLogOut, user } = useAuth();
   const [cart, refetch] = useCart();
+  console.log(cart.length);
 
   const handleSignOut = () => {
-    console.log("logout ");
     handleLogOut()
       .then(() => {})
       .catch();
+    refetch();
   };
 
   const nav = (
@@ -37,10 +38,12 @@ const Navber = () => {
       <li>
         <NavLink to="/aboutus">About Us</NavLink>
       </li>
-      <li>
-        {" "}
-        <NavLink to="/dashboard">Deshboard</NavLink>
-      </li>
+      {user && (
+        <li>
+          {" "}
+          <NavLink to="/dashboard">Deshboard</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -92,7 +95,7 @@ const Navber = () => {
               {nav}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">Lota Online Shop</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 uppercase border-red-500 ">
@@ -115,10 +118,10 @@ const Navber = () => {
               {user ? (
                 <>
                   <li>
-                    <Link to="/register">Deshboard</Link>
+                    <Link to="/dashboard">Deshboard</Link>
                   </li>
                   <li>
-                    <Link to="/register">My Orders</Link>
+                    <Link to="/myorder">My Orders</Link>
                   </li>
                   <li>
                     <button onClick={handleSignOut}>LogOut</button>
@@ -137,36 +140,40 @@ const Navber = () => {
             </ul>
           </div>
 
-          <Link to="/wishlist">
-            <button>
-              <CiHeart className="hover:text-[#01bad4] duration-200" />
-            </button>
-          </Link>
-          <div>
-            <Link to="/mycart">
-              <div tabIndex={0} role="button" className=" ">
-                <div className="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 hover:text-[#01bad4] duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span className="badge bg-black text-xl text-white badge-lg indicator-item">
-                    {cart.length}
-                  </span>
-                </div>
+          {user && (
+            <>
+              <Link to="/wishlist">
+                <button>
+                  <CiHeart className="hover:text-[#01bad4] duration-200" />
+                </button>
+              </Link>
+              <div>
+                <Link to="/mycart">
+                  <div tabIndex={0} role="button" className=" ">
+                    <div className="indicator">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8 hover:text-[#01bad4] duration-200"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      <span className="badge bg-black text-xl text-white badge-lg indicator-item">
+                        {cart.length}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>

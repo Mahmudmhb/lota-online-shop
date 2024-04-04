@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import { useQuery } from "@tanstack/react-query";
 import { CiHeart } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +28,7 @@ const Card = ({ product }) => {
         useName: user.displayName,
         userEmail: user.email,
       };
-
+      // console.log(wishlist);
       const res = await axiosPublic.post("/wishlist", wishlist);
       console.log(res.data);
       if (res.data.acknowledged === true) {
@@ -39,6 +40,7 @@ const Card = ({ product }) => {
           timer: 1500,
         });
         setIcon(true);
+        refetch();
       }
       if (res.data.insertId === null) {
         Swal.fire({
@@ -68,6 +70,7 @@ const Card = ({ product }) => {
     }
   };
   const handleAddToCart = async (product) => {
+    // console.log(product);
     if (user) {
       const addtocart = {
         name: product.name,
@@ -78,10 +81,10 @@ const Card = ({ product }) => {
         useName: user.displayName,
         userEmail: user.email,
       };
-
+      console.log(addtocart);
       const res = await axiosPublic.post("/addtocart", addtocart);
       console.log(res.data);
-      if (res.data.insertedId) {
+      if (res.data.insertId) {
         setCaetItem(false);
         Swal.fire({
           position: "center",
@@ -91,21 +94,21 @@ const Card = ({ product }) => {
           timer: 1500,
         });
         refetch();
-        if (res.data.message === true) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Already have your Cart......!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          refetch();
-        }
+      }
+      if (res.data.insertId === null) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Already have your Cart......!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
       }
     } else {
       Swal.fire({
         title: "Please Login?",
-        text: "You won't be able to Add Wishlist !",
+        text: "You won't be able to Add Cart !",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

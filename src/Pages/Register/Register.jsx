@@ -1,20 +1,38 @@
 import { useForm } from "react-hook-form";
 import Heading from "../../Sheard/Heading/Heading";
 import useAuth from "../../Hooks/useAuth/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { handleRegister } = useAuth();
+  const { handleRegister, handleUpdateUser } = useAuth();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     const name = data.name;
+    console.log(name);
     const email = data.email;
     const password = data.password;
+    const photoURL =
+      "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
     handleRegister(email, password)
       .then((result) => {
+        handleUpdateUser(name, photoURL)
+          .then()
+          .catch((error) => console.log(error.message));
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Welcome ${result.user.email}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+
         console.log(result.user);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   };
 
