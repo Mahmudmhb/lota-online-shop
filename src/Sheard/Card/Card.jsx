@@ -84,7 +84,7 @@ const Card = ({ product }) => {
       console.log(addtocart);
       const res = await axiosPublic.post("/addtocart", addtocart);
       console.log(res.data);
-      if (res.data.insertId) {
+      if (res.data.message) {
         setCaetItem(false);
         Swal.fire({
           position: "center",

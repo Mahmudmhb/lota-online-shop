@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 const Slider = () => {
   return (
@@ -16,7 +17,7 @@ const Slider = () => {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="mySwiper h-[580px] w-5/6 mx-auto"
+        className="mySwiper h-full md:h-[580px] w-full md:w-5/6 mx-auto"
       >
         <SwiperSlide>
           <div>
@@ -26,18 +27,19 @@ const Slider = () => {
               className="relative"
             />
 
-            <div className="absolute top-[180px]  right-1/3 text-center ">
+            <div className="absolute md:top-[180px] top-0 right-[28%] md:right-1/3 text-center ">
               <div className="my-10">
                 <h1 className="font-libre baskerville italic font-bold text-[#878787] uppercase">
                   SUMMER 2024
                 </h1>
-                <h1 className="text-[50px]  font-extrabold text-[#222222]">
+                <h1 className="md:text-[50px]  font-extrabold text-[#222222]">
                   FLASH SALE
                 </h1>
-
-                <button className=" text-[#222222] border-2 border-[#222222] rounded-full px-8 mt-5   p-1  hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
-                  Shop Now
-                </button>
+                <Link to="/shop">
+                  <button className=" text-[#222222] border-2 border-[#222222] rounded-full md:px-8 mt-5  px-3  md:p-1  hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
+                    Shop Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -48,23 +50,25 @@ const Slider = () => {
             alt=""
             className="relative"
           />
-          <div className="absolute top-[180px] right-0  ">
+          <div className="absolute  md:top-[180px] top-0 right-10 md:right-0  ">
             <div className="my-10">
               <h1 className="font-libre baskerville italic text-[#878787] font-bold">
                 2024 New Arrivals
               </h1>
-              <h1 className="text-[50px]  font-extrabold text-[#222222]">
+              <h1 className="md:text-[50px]  font-extrabold text-[#222222]">
                 SALE OFF! UP TO 70%
               </h1>
-              <p className="text-[#878787]">
+              <p className="text-[#878787] hidden md:flex">
                 Duis aute irure dolor in reprehenderit in voluptate velit
                 essecillum dolore <br />
                 eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                 nonproident
               </p>
-              <button className=" text-[#222222] border-2 border-[#222222] rounded-full px-8 mt-5   p-1  hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
-                Shop Now
-              </button>
+              <Link to="/shop">
+                <button className=" text-[#222222] border-2 border-[#222222] rounded-full md:px-8 md:mt-5 px-3  md:p-1   hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
+                  Shop Now
+                </button>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -75,23 +79,26 @@ const Slider = () => {
             alt=""
             className="relative"
           />
-          <div className="absolute top-[180px]  ">
+          <div className="absolute md:top-[180px] top-0 left-5 ">
             <div className="my-10">
               <h1 className="font-libre baskerville italic font-bold text-[#878787]">
                 Spring - Summer 2016
               </h1>
-              <h1 className="text-[50px]  font-extrabold text-[#222222]">
+              <h1 className="md:text-[50px]  font-extrabold text-[#222222]">
                 BEST OF COLLECTION!
               </h1>
-              <p className="text-[#878787]">
+              <p className="text-[#878787] hidden md:block">
                 Duis aute irure dolor in reprehenderit in voluptate velit
                 essecillum dolore <br />
                 eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                 nonproident
               </p>
-              <button className=" text-[#222222] border-2 border-[#222222] rounded-full px-8 mt-5   p-1  hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
-                Shop Now
-              </button>
+
+              <Link to="/shop">
+                <button className=" text-[#222222] border-2 border-[#222222] rounded-full md:px-8 md:mt-5 px-3  md:p-1  hover:border-[#01bad4] hover:text-white duration-300 hover:bg-[#01bad4] transform">
+                  Shop Now
+                </button>
+              </Link>
             </div>
           </div>
         </SwiperSlide>

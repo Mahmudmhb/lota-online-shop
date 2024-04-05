@@ -104,7 +104,7 @@ const MyCart = () => {
               <div className="border ">
                 <div className="flex justify-between border p-5">
                   <p>Subtotal</p>
-                  <p>${TotalPrice}</p>
+                  <p>${TotalPrice.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between border p-5">
                   <p>Shipping</p>
@@ -134,7 +134,7 @@ const MyCart = () => {
                   {newPrice === 0 ? (
                     <>
                       {" "}
-                      <p>${TotalPrice}</p>
+                      <p>${TotalPrice.toFixed(2)}</p>
                     </>
                   ) : (
                     <>

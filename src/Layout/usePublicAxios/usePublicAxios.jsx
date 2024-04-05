@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://lota-online-shop.vercel.app",
 });
 const usePublicAxios = () => {
   return axiosPublic;

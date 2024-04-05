@@ -84,7 +84,7 @@ const ProductDetails = () => {
 
     const res = await axiosPublic.post("/addtocart", addtocart);
     console.log(res.data);
-    if (res.data.insertId) {
+    if (res.data.message) {
       Swal.fire({
         position: "center",
         icon: "success",
