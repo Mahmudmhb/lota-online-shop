@@ -27,6 +27,7 @@ const ProductDetails = () => {
   const axiosPublic = usePublicAxios();
   const { id } = useParams();
   const [, refetch] = useProducts();
+  const [cartItem, setCaetItem] = useState(true);
 
   const [product, setProduct] = useState([]);
   const [count, setCount] = useState(1);
@@ -85,6 +86,7 @@ const ProductDetails = () => {
     const res = await axiosPublic.post("/addtocart", addtocart);
     console.log(res.data);
     if (res.data.message) {
+      setCaetItem(false);
       Swal.fire({
         position: "center",
         icon: "success",
@@ -250,21 +252,39 @@ const ProductDetails = () => {
                 <FaPlus />
               </button>
             </div>
-            <button
-              onClick={handleAddToCart}
-              className=" w-40 bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
-            >
-              Add to Cart
-            </button>
-            {/* className="    h-11 w-11 border rounded-full hover:text-[#01bad4] duration-200 hover:border-[#01bad4]  text-center" */}
-            <button onClick={() => AdddWishList(product)}>
+
+            {cartItem === false ? (
+              <>
+                {" "}
+                <div className="tooltip" data-tip="Allready Added to Cart">
+                  <p>Added to Cart</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleAddToCart}
+                  className=" w-40 bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
+                >
+                  Add to Cart
+                </button>
+              </>
+            )}
+
+            <button>
               {icon === true ? (
                 <>
-                  <FaHeart className="text-black h-11 w-11 border rounded-full hover:text-[#01bad4] duration-200 hover:border-[#01bad4]  text-center  text-2xl" />
+                  <div className="tooltip" data-tip="Allreay Added to Wishlist">
+                    <FaHeart className="text-black duration-200 text-2xl" />
+                    {/* <button className="btn">Hover me</button> */}
+                  </div>
                 </>
               ) : (
                 <>
-                  <CiHeart className="hover:text-[#01bad4] h-11 w-11 border rounded-full  duration-200 hover:border-[#01bad4]  text-center text-2xl" />
+                  <button onClick={() => AdddWishList(product)}>
+                    {" "}
+                    <CiHeart className="hover:text-[#01bad4] duration-200 text-2xl" />
+                  </button>
                 </>
               )}
             </button>

@@ -81,7 +81,6 @@ const Card = ({ product }) => {
         useName: user.displayName,
         userEmail: user.email,
       };
-      console.log(addtocart);
       const res = await axiosPublic.post("/addtocart", addtocart);
       console.log(res.data);
       if (res.data.message) {
@@ -149,7 +148,9 @@ const Card = ({ product }) => {
           {cartItem === false ? (
             <>
               {" "}
-              <p>Done</p>
+              <div className="tooltip" data-tip="Allready Added to Cart">
+                <p>Done</p>
+              </div>
             </>
           ) : (
             <>
@@ -164,14 +165,20 @@ const Card = ({ product }) => {
           )}
         </div>
         <div className="absolute top-2  left-2">
-          <button onClick={() => AdddWishList(product)}>
+          <button>
             {icon === true ? (
               <>
-                <FaHeart className="text-black duration-200 text-2xl" />
+                <div className="tooltip" data-tip="Allreay Added to Wishlist">
+                  <FaHeart className="text-black duration-200 text-2xl" />
+                  {/* <button className="btn">Hover me</button> */}
+                </div>
               </>
             ) : (
               <>
-                <CiHeart className="hover:text-[#01bad4] duration-200 text-2xl" />
+                <button onClick={() => AdddWishList(product)}>
+                  {" "}
+                  <CiHeart className="hover:text-[#01bad4] duration-200 text-2xl" />
+                </button>
               </>
             )}
           </button>

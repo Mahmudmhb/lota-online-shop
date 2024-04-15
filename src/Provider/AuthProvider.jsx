@@ -23,10 +23,10 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const handleUpdateUser = (name, photoURL) => {
+  const handleUpdateUser = (name, image) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photoURL,
+      photoURL: image,
     });
   };
   const handleLogin = (email, password) => {
@@ -40,8 +40,15 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        const res = axiosPublic.post("/users", currentUser).then((res) => {
-          // console.log(res.data)
+        const NewUser = {
+          email: currentUser.email,
+          name: currentUser.displayName,
+          image: currentUser.photoURL,
+          status: "user",
+        };
+        console.log(NewUser);
+        const res = axiosPublic.post("/users", NewUser).then((res) => {
+          console.log(res.data);
         });
       }
       setUser(currentUser);

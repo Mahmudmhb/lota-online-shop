@@ -40,7 +40,7 @@ const Login = () => {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6 w-1/2 mx-auto text-center"
+          className="space-y-6 md:w-1/2 w-full mx-auto text-center"
         >
           <label className="input input-bordered flex items-center gap-2">
             <svg
@@ -85,7 +85,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className=" w-40 bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
+            className=" w-full bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
           >
             {" "}
             Login

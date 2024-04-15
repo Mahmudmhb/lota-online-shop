@@ -14,7 +14,6 @@ const MyCart = () => {
   const TotalPrice = cart.reduce((price, cart) => price + cart.price, 0);
 
   // setNewPrice(TotalPrice);
-  console.log(TotalPrice);
 
   const HandleShipping = (item) => {
     setShipping(!shipping);
@@ -150,8 +149,8 @@ const MyCart = () => {
                       Proceed to checkout
                     </button> */}
                     <p className="text-red-700 font-bold mt-5">
-                      Free shopping is available Right now We will include it
-                      immediately
+                      Free shopping is not available Right now. We will include
+                      it immediately
                     </p>
                   </div>
                 </>

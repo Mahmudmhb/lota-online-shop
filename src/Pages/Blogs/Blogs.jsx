@@ -13,10 +13,10 @@ const Blogs = () => {
       ></Heading>
 
       <div className="grid md:grid-cols-3 gap-4">
-        {blogs.slice(0, 3).map((blog) => (
+        {blogs?.slice(0, 3).map((blog) => (
           <div key={blog._id}>
             <Link to={`/blogdetails/${blog._id}`}>
-              <div className="w-[365px] h-52 image-container">
+              <div className="md:w-[365px] h-52 image-container">
                 <img src={blog.banner} alt="" />
               </div>
             </Link>

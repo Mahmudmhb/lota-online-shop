@@ -10,16 +10,14 @@ const Register = () => {
   const navigate = useNavigate();
   const onSubmit = (data) => {
     const name = data.name;
-    console.log(name);
     const email = data.email;
     const password = data.password;
-    const photoURL =
+    const image =
       "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
     handleRegister(email, password)
       .then((result) => {
-        handleUpdateUser(name, photoURL)
-          .then()
-          .catch((error) => console.log(error.message));
+        console.log(name, image);
+        handleUpdateUser(name, image).then().catch();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -42,7 +40,7 @@ const Register = () => {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6 w-1/2 mx-auto text-center"
+          className="space-y-6 md:w-1/2 w-full mx-auto text-center"
         >
           <label className="input input-bordered flex items-center gap-2">
             <svg
@@ -101,7 +99,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className=" w-1/3 bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
+            className=" w-full bg-[#01bad4] text-white rounded-3xl p-2 uppercase font-bold"
           >
             {" "}
             Register now

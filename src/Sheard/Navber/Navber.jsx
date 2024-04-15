@@ -5,11 +5,10 @@ import { MdOutlinePhone } from "react-icons/md";
 import { TfiEmail } from "react-icons/tfi";
 import useAuth from "../../Hooks/useAuth/useAuth";
 import useCart from "../../Hooks/useCart/useCart";
-
+import logo from "../../assets/Lota Online Shop.png";
 const Navber = () => {
   const { handleLogOut, user } = useAuth();
   const [cart, refetch] = useCart();
-  console.log(cart.length);
 
   const handleSignOut = () => {
     handleLogOut()
@@ -48,7 +47,7 @@ const Navber = () => {
   );
 
   return (
-    <div className="">
+    <div className="bg-[#ffffff]">
       <div className="bg-[#f6f6f8] ">
         <div className="hidden md:flex justify-between  w-11/12 mx-auto   items-center">
           <div className="flex gap-4 h-12">
@@ -95,14 +94,52 @@ const Navber = () => {
               {nav}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Lota Online Shop</a>
+          <Link to="/" className=" text-xl hidden md:flex gap-3">
+            {/* Lota Online Shop */}
+            <img src={logo} alt="" width={"60px"} className="rounded-full" />
+          </Link>
+          <p className="ml-3"> Lota Online Shop</p>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 uppercase border-red-500 ">
             {nav}
           </ul>
         </div>
-        <div className="navbar-end items-center gap-3 text-2xl">
+        <div className="navbar-end md:hidden lg:hidden ">
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="">
+              <FaRegCircleUser className="hover:text-[#01bad4] " />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[50]  menu  shadow bg-base-100 rounded-box w-40"
+            >
+              {user ? (
+                <>
+                  <li>
+                    <Link to="/dashboard">Deshboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/myorder">My Orders</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleSignOut}>LogOut</button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">Register</Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+        <div className="navbar-end items-center hidden md:flex gap-3 text-2xl">
           <button>
             <CiSearch className="hover:text-[#01bad4] duration-200" />
           </button>
