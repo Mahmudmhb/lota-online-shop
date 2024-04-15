@@ -12,7 +12,31 @@ const AllUsers = () => {
       name: user.name,
       status: "Admin",
     };
-    const res = await axiosPublic.put(`/users/${user._id}`, updteUser);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to add new Admin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosPublic.put(`/users/${user._id}`, updteUser);
+        console.log(res.data);
+        if (res.data.modifiedCount === 1) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Now You are Admin`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        refetch();
+      }
+    });
   };
   const handleDeleteUser = async (user) => {
     Swal.fire({
@@ -71,12 +95,22 @@ const AllUsers = () => {
                   <td>{user.displayName}</td>
                   <td>{user.email}</td>
                   <td className="md:flex gap-2 justify-center">
-                    <button
-                      className="text-xl  border-black hover:border-[#01bad4] rounded-2xl py-1 px-5 border hover:bg-[#01bad4] hover:text-white duration-500"
-                      onClick={() => handleUpdateUser(user)}
-                    >
-                      Make Admin
-                    </button>
+                    {user.status === "Admin" ? (
+                      <>
+                        <h1 className="text-2xl text-[#01bad4]">
+                          {user.status}
+                        </h1>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="text-xl  border-black hover:border-[#01bad4] rounded-2xl py-1 px-5 border hover:bg-[#01bad4] hover:text-white duration-500"
+                          onClick={() => handleUpdateUser(user)}
+                        >
+                          Make Admin
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}

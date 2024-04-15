@@ -9,7 +9,7 @@ import Shop from "../Shop/Shop";
 const Home = () => {
   return (
     <div>
-      <Helmet title="home || lota-online-shop"></Helmet>
+      <Helmet title="home - lota-online-shop"></Helmet>
 
       <Slider></Slider>
       <Categoris></Categoris>

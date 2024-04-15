@@ -17,7 +17,6 @@ import { useEffect, useState } from "react";
 const Dashboard = () => {
   const { handleLogOut, user } = useAuth();
   const [loginUser, setLoginUser] = useState([]);
-  console.log(loginUser);
   const axiosPublic = usePublicAxios();
   useEffect(() => {
     const res = axiosPublic.get(`/users/${user?.email}`).then((res) => {
@@ -44,7 +43,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/allOrders">
+        <NavLink to="/dashboard/allorders">
           <FaUser></FaUser> All Orders
         </NavLink>
       </li>

@@ -11,6 +11,8 @@ import AllBlogs from "../Pages/Blogs/AllBlogs/AllBlogs";
 import Products from "../Pages/Shop/Products/Products";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AllOrders from "../Components/AllOrders/AllOrders";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -56,19 +58,43 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "allusers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <PrivateRoute>
+            <AllUsers></AllUsers>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allorders",
+        element: (
+          <PrivateRoute>
+            <AllOrders></AllOrders>
+          </PrivateRoute>
+        ),
       },
       {
         path: "wishlist",
-        element: <MyWishlist></MyWishlist>,
+        element: (
+          <PrivateRoute>
+            <MyWishlist></MyWishlist>
+          </PrivateRoute>
+        ),
       },
       {
         path: "mycart",
-        element: <MyCart></MyCart>,
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
       },
     ],
   },

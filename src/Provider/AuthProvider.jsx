@@ -39,6 +39,8 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setIsLoading(false);
+
       if (currentUser) {
         const NewUser = {
           email: currentUser.email,
@@ -46,7 +48,7 @@ const AuthProvider = ({ children }) => {
           image: currentUser.photoURL,
           status: "user",
         };
-        console.log(NewUser);
+
         const res = axiosPublic.post("/users", NewUser).then((res) => {
           console.log(res.data);
         });

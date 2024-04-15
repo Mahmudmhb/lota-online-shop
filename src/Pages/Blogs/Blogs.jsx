@@ -27,7 +27,7 @@ const Blogs = () => {
                 </h1>
               </Link>
               <p>By admin on {blog.date}</p>
-              <p>{blog.headingdescription.slice(0, 100)}</p>
+              <p>{blog.headingdescription?.slice(0, 100)}</p>
             </div>
           </div>
         ))}
