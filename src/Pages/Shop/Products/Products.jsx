@@ -49,7 +49,7 @@ const Products = () => {
       <div className="w-11/12 mx-auto mt-20 ">
         <Heading title={category}></Heading>
 
-        <div className="my-5  w-1/2 mx-auto">
+        <div className="my-5  md:w-1/2 mx-auto">
           <form onChange={handleSearch}>
             <label className="input input-bordered flex items-center gap-2">
               <input
@@ -73,38 +73,38 @@ const Products = () => {
             </label>
           </form>
         </div>
-        <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-1">
+        <div className="grid md:grid-cols-4 justify-center gap-4">
+          <div className="col-span-1 mx-auto  ">
             <h1 className="text-4xl  border-b-2 border-[#01bad4] mb-6 py-3">
               Categoris List
             </h1>
-            <div className="flex flex-col gap-5 justify-start">
+            <div className="flex md:flex-col  gap-5 justify-start">
               <button
-                className="text-xl border-black hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
+                className="text-xl border-black w-full hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
                 onClick={() => HandleCatogory("dress")}
               >
                 Dress
               </button>
               <button
-                className="text-xl border-black hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
+                className="text-xl border-black w-full hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
                 onClick={() => HandleCatogory("tops")}
               >
                 Tops
               </button>
               <button
-                className="text-xl border-black hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
+                className="text-xl border-black w-full hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
                 onClick={() => HandleCatogory("shoes")}
               >
                 Shoes
               </button>
               <button
-                className="text-xl border-black hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
+                className="text-xl border-black px-5 w-full hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
                 onClick={() => HandleCatogory("t-shirt")}
               >
                 T-Shirt
               </button>
               <button
-                className="text-xl border-black hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
+                className="text-xl border-black w-full hover:border-[#01bad4] rounded-2xl py-1 border hover:bg-[#01bad4] hover:text-white duration-500"
                 onClick={() => HandleCatogory("caps")}
               >
                 Caps
