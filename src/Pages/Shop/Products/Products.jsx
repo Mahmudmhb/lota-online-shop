@@ -7,6 +7,9 @@ import Bannar from "../../../Sheard/Bannar/Bannar";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  console.log(products);
+  const [newProducts, setNewProducts] = useState("");
+  console.log(newProducts);
   const [category, setCategory] = useState("All products");
   const axiosPublic = usePublicAxios();
   useEffect(() => {
@@ -22,6 +25,16 @@ const Products = () => {
     setProducts(res.data);
     setCategory(category);
   };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const searchProduct = e.target.value;
+    console.log(searchProduct);
+    const searchFliter = products.filter((item) =>
+      item.name.toLowerCase().includes(searchProduct.toLowerCase())
+    );
+    setNewProducts(searchFliter);
+  };
   return (
     <div>
       <Helmet title="shop - lota-online-shop"></Helmet>
@@ -32,8 +45,34 @@ const Products = () => {
         title={"Shop All Products"}
         text={"Shop All Products"}
       ></Bannar>
+
       <div className="w-11/12 mx-auto mt-20 ">
         <Heading title={category}></Heading>
+
+        <div className="my-5  w-1/2 mx-auto">
+          <form onChange={handleSearch}>
+            <label className="input input-bordered flex items-center gap-2">
+              <input
+                name="search"
+                type="text"
+                className="grow"
+                placeholder="Search your product"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-4 h-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </label>
+          </form>
+        </div>
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">
             <h1 className="text-4xl  border-b-2 border-[#01bad4] mb-6 py-3">
@@ -74,9 +113,19 @@ const Products = () => {
           </div>
           <div className="col-span-3">
             <div className="grid md:grid-cols-3 gap-4">
-              {products.map((product) => (
-                <Card key={product._id} product={product}></Card>
-              ))}
+              {newProducts === "" ? (
+                <>
+                  {products.map((product) => (
+                    <Card key={product._id} product={product}></Card>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {newProducts.map((product) => (
+                    <Card key={product._id} product={product}></Card>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>

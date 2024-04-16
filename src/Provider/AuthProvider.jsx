@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -49,9 +50,7 @@ const AuthProvider = ({ children }) => {
           status: "user",
         };
 
-        const res = axiosPublic.post("/users", NewUser).then((res) => {
-          console.log(res.data);
-        });
+        const res = axiosPublic.post("/users", NewUser).then((res) => {});
       }
       setUser(currentUser);
       setIsLoading(false);

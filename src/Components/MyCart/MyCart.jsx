@@ -24,7 +24,6 @@ const MyCart = () => {
 
   // setNewPrice(TotalPrice);
   const handleDelete = async (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You Want to Remove item!",
@@ -36,7 +35,6 @@ const MyCart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosPublic.delete(`/addtocart/${id}`);
-        console.log(res.data);
         if (res.data.deletedCount === 1) {
           Swal.fire({
             position: "center",
@@ -52,7 +50,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto text-center ">
+    <div className="w-5/6 mx-auto text-center my-10">
       <Heading title={"my cart"}></Heading>
       {cart.length ? (
         <>
