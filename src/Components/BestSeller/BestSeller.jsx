@@ -18,7 +18,26 @@ const BestSeller = () => {
     const category = await axiosPublic.get(`/product/${tabId}`);
     setCategoris(category.data);
   };
-
+  if (dress.length === 0) {
+    return (
+      <>
+        <Heading title={"BEST SELLER"} text={"Top sale in this week"}></Heading>
+        <div className="flex justify-center items-center flex-row">
+          <div>
+            <h1 className="text-center text-3xl text-red-500 min-h-[200px] flex justify-center items-center">
+              Loadding..............
+            </h1>
+            <div className="flex  w-52 flex-col gap-4">
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <div className="w-5/6 mx-auto">
       <Heading title={"BEST SELLER"} text={"Top sale in this week"}></Heading>

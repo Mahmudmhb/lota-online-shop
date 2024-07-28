@@ -14,6 +14,8 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllOrders from "../Components/AllOrders/AllOrders";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import AboutUs from "../Pages/About/AboutUs";
+import ContactUs from "../Pages/Contact/ContactUs";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
       {
         path: "/register",

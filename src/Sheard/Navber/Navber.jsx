@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { CiHeart, CiSearch } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import { MdOutlinePhone } from "react-icons/md";
 import { TfiEmail } from "react-icons/tfi";
 import useAuth from "../../Hooks/useAuth/useAuth";
@@ -32,10 +32,10 @@ const Navber = () => {
         <NavLink to="/allblogs">Blogs</NavLink>
       </li>
       <li>
-        <NavLink to="/contactus">Contact Us</NavLink>
+        <NavLink to="/contact-us">Contact Us</NavLink>
       </li>
       <li>
-        <NavLink to="/aboutus">About Us</NavLink>
+        <NavLink to="/about-us">About Us</NavLink>
       </li>
       {user && (
         <li>
@@ -57,7 +57,7 @@ const Navber = () => {
             </p>
             <h1 className="flex gap-2 items-center ">
               <TfiEmail />
-              lotaonline@gamil.com
+              lotaonlineshop@gamil.com
             </h1>
           </div>
           <p>
@@ -140,9 +140,9 @@ const Navber = () => {
           </div>
         </div>
         <div className="navbar-end items-center hidden md:flex gap-3 text-2xl">
-          <button>
+          {/* <button>
             <CiSearch className="hover:text-[#01bad4] duration-200" />
-          </button>
+          </button> */}
 
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="">
